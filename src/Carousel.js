@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 class Carousel extends React.Component {
     state = {
@@ -14,26 +14,31 @@ class Carousel extends React.Component {
 
         return { photos };
     }
+    handleIndexClick = event => {
+        this.setState({
+            active: +event.target.dataset.index
+        });
+    };
     render() {
         const { photos, active } = this.state;
-
         return (
             <div className="carousel">
                 <img src={photos[active]} alt="animal" />
                 <div className="carousel-smaller">
-                    {this.props.medai.photos.map((photo, index) => (
+                    {photos.map((photo, index) => (
+                        // eslint-disable-next-line
                         <img
-                            key={photo.large}
+                            key={photo}
                             onClick={this.handleIndexClick}
                             data-index={index}
-                            src={photo.large}
+                            src={photo}
                             className={index === active ? "active" : ""}
                             alt="animal thumbnail"
                         />
                     ))}
                 </div>
             </div>
-        )
+        );
     }
 }
 
